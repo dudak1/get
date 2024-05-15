@@ -31,8 +31,8 @@ axes.set_title("Процесс заряда и разряда конденсат
 charge_plot_line   , = axes.plot(charge_data[0], charge_data[1], color = 'blue')
 discharge_plot_line, = axes.plot(discharge_data[0], discharge_data[1], color = 'red')
 
-charge_plot_line.set_label("Capacitor charge")
-discharge_plot_line.set_label("Capacitor discharge")
+charge_plot_line.set_label("Конденсатор заряжается")
+discharge_plot_line.set_label("Конденсатор разряжается")
 axes.legend(prop={"size":16})
 
 x_limits = (0.0, math.ceil(time_max))
@@ -43,7 +43,9 @@ axes.xaxis.set_minor_locator(MultipleLocator(0.5))
 axes.xaxis.set_major_locator(MultipleLocator(1.0))
 axes.yaxis.set_minor_locator(MultipleLocator(0.25))
 axes.yaxis.set_major_locator(MultipleLocator(0.5))
-axes.grid(color = "blue", which = "both", linestyle = ':', linewidth = 0.5)
+
+axes.grid(color = "blue", which = "major", linestyle = ':', linewidth = 0.5)
+axes.grid(color = "black", which = "minor", linestyle = ':', linewidth = 0.5)
 
 charge_time    = time_arr[volt_max_ind] - time_arr[0]
 discharge_time = time_arr[-1] - time_arr[volt_max_ind]
@@ -59,7 +61,7 @@ axes.text(x=charge_time+0.1, y = 0.05, s=str(round(charge_time, 2)), fontsize = 
 axes.scatter(x = 0.0, y = volt_max, color = 'green')
 axes.text(x = 0.1, y = volt_max+0.05, s = str(round(volt_max, 2)), fontsize = 12)
 
-axes.text(x = (charge_time/2-0.8), y = volt_max/2, s = ("Charge time: " + str(round(charge_time, 2)) + " s"), color = 'blue', fontsize = 14)
-axes.text(x = (charge_time+discharge_time/2-0.8), y = volt_max/2, s = ("Discharge time: " + str(round(discharge_time, 2)) + " s"), color = 'red', fontsize = 14)
+axes.text(x = (charge_time/2-0.8), y = volt_max/2, s = ("Время зарядки: " + str(round(charge_time, 2)) + " s"), color = 'blue', fontsize = 14)
+axes.text(x = (charge_time+discharge_time/2-0.8), y = volt_max/2, s = ("Время разрядки: " + str(round(discharge_time, 2)) + " s"), color = 'red', fontsize = 14)
 
 figure.savefig("graph.svg")
